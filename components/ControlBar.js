@@ -35,8 +35,9 @@ const ControlBar = (props) => {
         progress={progress}
         theme={theme}
       />
+      <Time time={duration} theme={theme} />
       <ToggleIcon
-        paddingLeft
+        paddingRight
         theme={theme}
         onPress={() => props.toggleMute()}
         isOn={muted}
@@ -44,16 +45,6 @@ const ControlBar = (props) => {
         iconOn="volume-mute"
         size={20}
       />
-      <Time time={duration} theme={theme} />
-      { !inlineOnly &&
-      <ToggleIcon
-        paddingRight
-        onPress={() => props.toggleFS()}
-        iconOff="fullscreen"
-        iconOn="fullscreen-exit"
-        isOn={fullscreen}
-        theme={theme}
-      />}
     </LinearGradient>
   )
 }

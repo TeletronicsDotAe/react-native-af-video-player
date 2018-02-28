@@ -15,26 +15,13 @@ const backgroundColor = 'transparent'
 
 const styles = StyleSheet.create({
   container: {
-    height: 35,
-    justifyContent: 'center'
+    height: 40,
   },
   row: {
     flexDirection: 'row',
-    alignSelf: 'center',
-    alignItems: 'center'
+    alignItems: 'flex-start',
+    paddingTop: 12,
   },
-  title: {
-    flex: 1,
-    backgroundColor,
-    paddingLeft: 10,
-    paddingRight: 35,
-    fontSize: 16
-  },
-  logo: {
-    marginLeft: 5,
-    height: 25,
-    width: 25
-  }
 })
 
 const TopBar = (props) => {
@@ -43,22 +30,22 @@ const TopBar = (props) => {
     more,
     title,
     theme,
-    onMorePress
+    onMorePress,
+    onClosePress,
   } = props
   return (
     <LinearGradient colors={['rgba(0,0,0,0.75)', 'rgba(0,0,0,0)']} style={styles.container}>
       <View style={styles.row}>
-        { logo && <Image style={styles.logo} resizeMode="contain" source={{ uri: logo }} />}
-        <Text
-          style={[styles.title, { color: theme }]}
-          numberOfLines={1}
-          ellipsizeMode="tail"
-        >
-          {title}
-        </Text>
+        <ToggleIcon
+          onPress={() => onClosePress()}
+          paddingLeft
+          iconOff="close"
+          iconOn="close"
+          theme={theme}
+          size={26}
+        />
         { more &&
           <ToggleIcon
-            style={styles.more}
             onPress={() => onMorePress()}
             paddingRight
             iconOff="more-horiz"

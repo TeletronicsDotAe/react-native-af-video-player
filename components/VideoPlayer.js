@@ -4,7 +4,6 @@ import {
   View,
   Text,
   StyleSheet,
-  StatusBar,
   Dimensions,
   BackHandler,
   Image,
@@ -44,7 +43,7 @@ class VideoPlayer extends Component {
     this.state = {
       paused: !props.autoPlay,
       muted: false,
-      fullScreen: false,
+      fullScreen: true,
       height: Win.height,
       loading: false,
       duration: 0,
@@ -116,7 +115,7 @@ class VideoPlayer extends Component {
       }
       if (orientation === 'PORTRAIT') {
         this.setState({
-          fullScreen: false,
+          fullScreen: true,
           landscape: false,
           height,
           paused: (this.props.fullScreenOnly && this.state.landscape) || this.state.paused
@@ -261,6 +260,7 @@ class VideoPlayer extends Component {
       theme,
       onTimedMetadata,
       resizeMode,
+      onClosePress,
       onMorePress,
       inlineOnly,
       playInBackground,
@@ -271,7 +271,6 @@ class VideoPlayer extends Component {
       <View
         style={[styles.background, fullScreen ? (styles.fullScreen, { height }) : styles.inline]}
       >
-        <StatusBar hidden={fullScreen} />
         {
           ((loading && placeholder) || currentTime < 0.1) &&
           <Image resizeMode="cover" style={styles.image} source={{ uri: placeholder }} />
@@ -315,6 +314,7 @@ class VideoPlayer extends Component {
           title={title}
           more={!!onMorePress}
           onMorePress={() => onMorePress()}
+          onClosePress={() => onClosePress()}
           theme={theme}
           inlineOnly={inlineOnly}
         />
@@ -336,6 +336,7 @@ VideoPlayer.propTypes = {
   logo: PropTypes.string,
   resizeMode: PropTypes.string,
   onMorePress: PropTypes.func,
+  onClosePress: PropTypes.func,
   onFullScreen: PropTypes.func,
   onTimedMetadata: PropTypes.func,
   theme: PropTypes.string,
@@ -357,6 +358,7 @@ VideoPlayer.defaultProps = {
   logo: undefined,
   resizeMode: 'contain',
   onMorePress: undefined,
+  onClosePress: undefined,
   onFullScreen: () => {},
   onTimedMetadata: undefined,
   theme: 'white',
